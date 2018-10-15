@@ -1,42 +1,48 @@
 //your code here
-NormalParticle bob;
+Particle[] bob;
 void setup()
 {
   background(255);
 	size(1000,1000);
+  bob = new Particle[1000];
+  for(int i=0;i<bob.length;i++){
+    bob[i] = new NormalParticle();
+  }
 }
+
 void draw()
 {
-  bob = new NormalParticle(200,200,200,30,50);
-  bob.move();
-  bob.show();
+  for(int i = 0;i<bob.length;i++){
+     bob[i].move();
+     bob[i].show();
+  }
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	double pX, pY, speed, angle;
-  int colr;
-  NormalParticle(double x, double y, double spd, double ang, int clr){
-     pX = x;
-     pY = y;
-     speed = spd;
-     angle = ang;
-     colr = clr;
+  
+  NormalParticle(){
+     pX = pY = 500;
+     speed = (float)(Math.random()*6);
+     
+     angle = Math.random()* 2*PI;
+     
   }
   void move(){
-    pX = (float)(Math.cos(angle) * speed);
+    pX += (float)(Math.cos(angle) * speed);
 
-    pY = (float)(Math.sin(angle) * speed);
-    System.out.print(pX);
+    pY += (float)(Math.sin(angle) * speed);
+    
   }
   void show(){
-    fill(colr);
-    ellipse((float)pX,(float)pY + (float)(Math.sin(angle) * speed),50,50);
-    System.out.print(pY);
+    fill(0);
+    ellipse((float)pX,(float)pY,10,10);
   }
 }
 interface Particle
 {
-	//your code here
+	public void move();
+  public void show();
 }
 class OddballParticle //uses an interface
 {
