@@ -1,15 +1,38 @@
 //your code here
+NormalParticle bob;
 void setup()
 {
-	//your code here
+  background(255);
+	size(1000,1000);
 }
 void draw()
 {
-	//your code here
+  bob = new NormalParticle(200,200,200,30,50);
+  bob.move();
+  bob.show();
 }
 class NormalParticle
 {
-	//your code here
+	double pX, pY, speed, angle;
+  int colr;
+  NormalParticle(double x, double y, double spd, double ang, int clr){
+     pX = x;
+     pY = y;
+     speed = spd;
+     angle = ang;
+     colr = clr;
+  }
+  void move(){
+    pX = (float)(Math.cos(angle) * speed);
+
+    pY = (float)(Math.sin(angle) * speed);
+    System.out.print(pX);
+  }
+  void show(){
+    fill(colr);
+    ellipse((float)pX,(float)pY + (float)(Math.sin(angle) * speed),50,50);
+    System.out.print(pY);
+  }
 }
 interface Particle
 {
@@ -23,4 +46,3 @@ class JumboParticle //uses inheritance
 {
 	//your code here
 }
-
